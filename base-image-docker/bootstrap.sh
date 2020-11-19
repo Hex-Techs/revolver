@@ -50,7 +50,10 @@ private::docker::build() {
     fi
     for file in ${DOCKERFILE_DIFF[@]}
     do
-        if [[ ! -a $file ]];then
+        echo $file | awk -F"${PROJECT}/" '{print $2}'
+        local docker_file=$(echo $file | awk -F"${PROJECT}/" '{print $2}')
+        if [[ ! -f ${docker_file} ]];then
+            public::common::log "${docker_file} is not exist, skip"
             continue
         fi
         local project=$(echo ${file} | awk -F"/" '{print $1}')
@@ -58,10 +61,10 @@ private::docker::build() {
             public::common::log "${file} is in ${project}, it is not in project ${PROJECT}, skip"
             continue
         fi
-        local repo=$(echo $file | awk -F"/" '{print $1}')
-        local tag=$(echo $file | awk -F"/" '{print $2}')
-        public::common::log "Build Command: docker build -t ${REPO}/${repo}:${tag} -f ${file} ${repo}/${tag}"
-        docker build -t ${REPO}/${repo}:${tag} -f ${file} ${repo}/${tag}
+        local repo=$(echo $docker_file | awk -F"/" '{print $1}')
+        local tag=$(echo $docker_file | awk -F"/" '{print $2}')
+        public::common::log "Build Command: docker build -t ${REPO}/${repo}:${tag} -f ${docker_file} ${repo}/${tag}"
+        docker build -t ${REPO}/${repo}:${tag} -f ${docker_file} ${repo}/${tag}
         if [[ ${PUSH} == "true" ]];then
             public::common::log "Push Command: docker push ${REPO}/${repo}:${tag}"
             docker push ${REPO}/${repo}:${tag}
