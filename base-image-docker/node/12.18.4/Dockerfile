@@ -1,4 +1,4 @@
-FROM registry.cn-beijing.aliyuncs.com/nenly/alpine:3.12.1
+FROM starkindustres/alpine:3.12.1
 
 ENV NODE_VERSION=12.18.4-r0
 
