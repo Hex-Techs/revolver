@@ -6,6 +6,7 @@
 
 export REPO="hextechs"
 export DOCKERFILE_DIFF=()
+export IGNORE_ARRAY=()
 
 public::common::log() {
     echo -e "\033[0;32m[ $1 ]\033[0m"
@@ -43,7 +44,7 @@ private::git::diff() {
 }
 
 public::common::ignore() {
-    export IGNORE=($(echo ${IGNORE} | tr ',' ' '))
+    IGNORE_ARRAY=(`echo ${IGNORE} | tr ',' ' '`)
 }
 
 private::docker::build() {
@@ -52,23 +53,25 @@ private::docker::build() {
         exit 0
     fi
     export BUILD=1
+    public::common::ignore
     for file in ${DOCKERFILE_DIFF[@]}
     do
         local repo=$(echo ${file} | awk -F"/" '{print $1}')
-        for ignore in ${IGNORE[@]}
+        echo ${IGNORE_ARRAY[@]}
+        for i in ${IGNORE_ARRAY[@]}
         do
-            if [[ ${ignore} == ${repo} ]];then
+            if [[ ${i} == ${repo} ]];then
                 BUILD=0
                 break
             fi
         done
         if [[ ${BUILD} == 0 ]];then
             public::common::log "skip ignore repo ${file}"
-            break
+            continue
         fi
         local tag=$(echo ${file} | awk -F"/" '{print $2}')
         public::common::log "Build Command: docker build -t ${REPO}/${repo}:${tag} -f ${file} ${repo}/${tag}"
-        docker build -t ${REPO}/${repo}:${tag} -f ${docker_file} ${repo}/${tag}
+        # docker build -t ${REPO}/${repo}:${tag} -f ${file} ${repo}/${tag}
         if [[ ${PUSH} == "true" ]];then
             public::common::log "Push Command: docker push ${REPO}/${repo}:${tag}"
             docker push ${REPO}/${repo}:${tag}
@@ -85,7 +88,7 @@ Usage:
 Flags:
       --commit1 string              Old git commit id
       --commit2 string              New git commit id
-      --ignore  list                Ignore which repo and separate them with commas (e.g. --ignore=phabricator,phabricator-notification)
+      --ignore  list                Ignore which repo and separate them with commas (e.g. --ignore phabricator,phabricator-notification)
       --push    string              Whether to push the image to the repository (must be \"true\" or not set)
 
 if commit1 and commit2 are null, use the lastest two commit ID.
