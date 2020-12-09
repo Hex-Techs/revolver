@@ -1,0 +1,211 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: phabricator
+  namespace: corp
+  labels:
+    app: phabricator
+data:
+  mysql-password: "B62smLcSHSUQzg"
+  smtp-password: "PagLiano123"
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: git-ssh-key
+  namespace: corp
+  labels:
+    app: phabricator
+type: Opaque
+data:
+  ssh_host_dsa_key: LS0tLS1CRUdJTiBEU0EgUFJJVkFURSBLRVktLS0tLQpNSUlCdWdJQkFBS0JnUURpWjFUYjVMV29FeHB1N3FodHJkUlQrbnRiN09JVms1MWdaSWxKVDFNdjN3dnV1M3dPCjZnR0dEeVNIY0ZpNHdZV1pmYnNGRDdHekZ4Q0hHaUI4U25FbVg2RlFSazNBMlhpd2JzT09qT29mQmR1SnhXdmcKMW9JOWR2ZzBNN2hKMmRnRVlLNmtFS2ZuZ25mQmhnRHhSUEpiNkhYWmQ4ZUhhU2lmeXQ5ejBZTXVYd0lWQUlnTQpVdlRCRTdyZ1kzVXkzUmF2MFkvYWo0TjFBb0dBRFZWUkE1dGVQS2s5OU5xUkpCQ3RSWnN0R1d4WXpML2FBeWxLCjVLcWR5MEFBTjF3OU1FRkcvS3BwTG8zc2lIeEZXM1lUdEVrZVFvUjMzKzd3UE9FUTJMbndrd2s5TThneG5Wc1cKUlZvZndLdXJWQlUzWGF2QVZGMStvYXBJa1Viakk4MDd2YWJzWkFyRWp6bmgraVB5ampWcmVFVFNOeC8weHNWagovVGpZUWpZQ2dZQVVVaXFscUI3bGhnb0FrcEVZYThBc1FyaEQzMU1oaXdnS1ZMVU9DQVdPblZmM1gzQ2phWno5CjNuN0VTSytlVU5FMDAzR0pqblM3M2N4TTZ1M1JIR1dleDRsOHkrY1NLOW5TUlZVRHNBd1JtdFJKclpseUl6OGEKRzZ0RkJDRXAxWjAyNzJmTHdKZC9zWTRxWWxjT1NycXNCK0tWRFpyNWpXWVVqeGpabU1scEFBSVVYcGY5VFFOSQp0L1JZL1k0dWNQVFJUbjIzQjdjPQotLS0tLUVORCBEU0EgUFJJVkFURSBLRVktLS0tLQ==
+  ssh_host_ecdsa_key: LS0tLS1CRUdJTiBFQyBQUklWQVRFIEtFWS0tLS0tCk1IY0NBUUVFSUkxeTVrYTRGWE9FWVFLd0JaMHIyV2FpRFRLVlJFQU54UXAzbTlKN0I4VFZvQW9HQ0NxR1NNNDkKQXdFSG9VUURRZ0FFZE0rcXMrT0RhYzgxQlg2TDNiVnc5QUZ4RGZlT2RjaktLV0NNR1lVdEtGS0xvL01IU2VsWgpjczR1MVdSSkR4Q2UvT2pXVnY2c3dGY29JYnJXZkRCb3NBPT0KLS0tLS1FTkQgRUMgUFJJVkFURSBLRVktLS0tLQ==
+  ssh_host_ed25519_key: LS0tLS1CRUdJTiBEU0EgUFJJVkFURSBLRVktLS0tLQpNSUlCdXdJQkFBS0JnUUNuMEtPMXhCdDFET3hvZUtmNnRmUGZSQjhXeXBWQUc0RnFRL3BpZjgwS1RVdmgrSXFUCk56ZGZhNmZpeE85ODc5Vkt3ayt0WlloWU5aYU90VlNVdHpYd2JvdjQ5UUlUUEdJb001VC9BcnpJWVJVdWlZZ3gKT1ZYLzE2aVVGdUkzMGtxdTVEQ1VJRENTWUFjQTN3T25FRGpDc2FlZmRhcWg3ZUJ3aFRENWpPNVlFUUlWQU8wUApGRDdlQnlaVy9ZVmZWdk5hZlZZMkxvNkxBb0dBWDM4anpEWDBZK3RkQTVUMThGOHhDZERJZFNHQ0pOUkpNNFB5Ci81TjJUT1Nla2M5VDd3YXAwMTJQM0dVcDEyT0Z5aXBTVmxJcjhaTFQveEEvdldLQUdJMEtIRzhwMTNvd3A2VlMKZTV4QmxiR1p1ZnczUTNkWUNsZFZkcG93Ni9EdTdUQXhsR2hGemxjSWd4c0k5b0FEeXZxSmdFV05yWkdSclpmSAoyamRaQzdrQ2dZRUFvSHZlSnoxdlhHZU9KU3FsVUZhSEQwNWxWSkpSWm10ODdSS043Wlc4bEg5UWpzUkNhQzl6CmRJeEdEbFhTcXZKbFk5NW94N2dteWZxUjdvNkNYSEpYWmc2aVBiMVQxa1lhbktUZk5vMW5HTzRVbEI4WnpSY2UKbmZNOEVSaGgvRVdwNzZXUjZVanA5YjVybHNkMG9VS0JiZGI5OHYzM1kxeDh1Wm8yY2czTUswUUNGRUs5NnRtZgorRW9acW5mMytxSlZXN29xaEZOWAotLS0tLUVORCBEU0EgUFJJVkFURSBLRVktLS0tLQ==
+  ssh_host_rsa_key: LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFb3dJQkFBS0NBUUVBeFl0VE1say9PeStyQTV1SFgxenFIM0crb25saDNnSHpwbzdpS2JWQlBqR0lLNmNBCnV2dU5IcVc4TVgzazM5YmFrMFBCU1hLYjNmelBYcUtXbFBXVFdEKzhESmV3YlBIQ3FtQmZxbVhMdFhiQi9OQUoKS2VPSTROenBxM2JkVG81MmtEUktCd0F2SFpQcnk4R0ltVXN2Tm5tMTNYaWk2RGVHYUhHWlNNeldLV1A5dFpDQQovQ3JNV0NEaS9ya0tnNEZZeGtqY0FxNnExNjlRVFpURHUrZkNyZGJUak5rMU5aM2krNVB3MmR3a3BOTldVSkdCCldZRWVhME4wSUFXSUR5bzRXTE1vTUJyQVlici9SMWE5RlVlaE83alJWYVc1NWRGbm5hckVnSE5MaURJa3Y1SXMKTVIvMXFFaHFTMmlvaGlkY1pvbFRFVFJ0SjJMaVVWQW9DMFZBSHdJREFRQUJBb0lCQVFDc085R0o4RzVFK0VhdQptb2ZwQ1dYSGpMQ2RrQjlZSlhOK0lNM25kM1V1K0ppMUZxSjRaS0todWZiZlg5aVJvUTVwbjRXQ3VENVZ5Zm96CmxLYWRzWStLUGVlRFF5NDdqbjRmZG05eWJkYXluSngrQkJRNVJYMHVNTzQ2NVNRSFBnYjVxOTF2UlNYUE1BMUMKVmJiM2tLblZZVUREbkU3TkVMeExpK0FOclNwOFluMXhaQnV1Wk1ja2R4Q0tHSFhGZWlrOXdtN3dRUXEvZ2xXTApuQ01XMjhGTXBCVFEvZTBxODhTL3g4VG5WU1lzcFZZWm9HNi9RNEZjN0ZXTTVmekJma3RBWStZQlN5MWRlNHNTCi9NRDR3cmNySTFGcVpiR0R6ZDN2MEJIdnBCNkpoMkJVNTFEQW5uMkppMTRuOW1uVjJMMzFvVVcrTjRrN25JUmcKY09Id3pKVWhBb0dCQU9xSWR3ZVlCZ3lQS001YjRqS0xmbmJoWWtIcGhua2dtNmdUd3lNeWxpRGhIZnViblBxMApHajJCTm01bFB0NFVaQmU1aTNkT1pXenhIdDl1S0ZDWWU0eHVtU1Bsd1dKWjk0UWNYOGJ0eCtWbG44emZWN0dUCmxTOUE5T0ZCaU9GVjFQcGVBSHZ0dlozNWRNcVlkWjJkaXlIWGVONWRCQnlhOUZIWllnakFiTjQxQW9HQkFOZWcKSlF2WTh5eE85Q2JFVDV6MjZ4dHJxdG05d3JIWTJsTE9ZQ1BQdkRtTlZHUHZnS2lrMEhCVG5qTnlRZTBUdmo3VAoyb3NsbW1RbGcwZ2MvMUFOcTR6S3NLckFsZnRXUlY2SmJTK1ZmN0s5KzZTQmh2eEtJMFEzMzhMUGE2c2llam1UCnFOcFM2RE95bGdOY01SZzVBb0VSSXpqTDdaMlRqbnREaGhsRGJyK0RBb0dBVmtVcVc1MjlJK09KSkJkQ1prdFAKa3BVbldvMTNESmxGQ0pkMFlUOGJZQzdPbzUzREtha1VPZW1NeHlEdzlpblVBN0lacmlJbFJ1U084YXNJbzFUagpwVzJOWVZvRFA1Vk9hY2N5SisrUlp6MXhnWi9xRndUdGpIczlXSnFOcWkyemNRRWc5blVtR2JVSUUvbnUwYktBCjJrcnpTQUE1SWZpUnhJWE0vT0VqYXIwQ2dZQnVwMkJibEJvMndzM0lselhEOTNMdnYzRU9ETE85VU91NVV1OUQKY1hmR2tTQ2RxR3IrSUpaWERwSkJGSUdBaUlFNC9MOUthU0d5QXc0OEU2VnlENUhaenFxYTlmb0I0V1AzLzg1bwpmTy9yYWxPWk9GOXRXUjZBQTZ4dzdNRDBNZDFIYnQ5WUt2TytsQWNuOGtlL2hvSWllZ2o1UEszVUQ4VXV2SmcwCm5zWld3UUtCZ0dmQVNFNU5SQ0pVZDAvekJkMElya3BkdWtpNjV2cHNvNlBUSDQyVVloWnpaUzZiZTJFR3RsS2UKNHdXeTJibUxzZ2g2bWQ0S1g3ZEhuWnVXNDdUQkFhZkYxUXJQcUx6UnZRVElHV1JvVFprbjgvT1hsT2xRV21hegp5ajRCWTNtZ056VC9UeGxXZi93UTZhMVd4MFV4eHlyVy9GY01YVzdyNi9FeFVzMkF0eVBaCi0tLS0tRU5EIFJTQSBQUklWQVRFIEtFWS0tLS0t
+
+---
+
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: phabricator-data
+  namespace: corp
+spec:
+  accessModes:
+    - "ReadWriteOnce"
+  resources:
+    requests:
+      storage: "50Gi"
+  storageClassName: "standard"
+
+---
+
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: phabricator-repo
+  namespace: corp
+spec:
+  accessModes:
+    - "ReadWriteOnce"
+  resources:
+    requests:
+      storage: "200Gi"
+  storageClassName: "standard"
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: phabricator
+  namespace: corp
+spec:
+  type: NodePort
+  ports:
+    - port: 80
+      targetPort: 80
+      protocol: TCP
+      name: http
+    - port: 22
+      targetPort: 22
+      protocol: TCP
+      name: ssl
+      nodePort: 31847
+  selector:
+    app: phabricator
+
+---
+
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: phabricator
+  namespace: corp
+  labels:
+    app: phabricator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: phabricator
+  template:
+    metadata:
+      labels:
+        app: phabricator
+    spec:
+      containers:
+      - name: phabricator
+        image: registry.cn-beijing.aliyuncs.com/nenly/phabricator:20181211-5
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: SERVER_NAME
+          value: dev.nenly.cn
+        - name: MYSQL_HOST
+          value: rm-2zenxwch12hg7o2m9.mysql.rds.aliyuncs.com
+        - name: MYSQL_PASS
+          valueFrom:
+            configMapKeyRef:
+              name: phabricator
+              key: mysql-password
+        - name: SMTP_HOST
+          value: smtpdm.aliyun.com
+        - name: SMTP_PASS
+          valueFrom:
+            configMapKeyRef:
+              name: phabricator
+              key: smtp-password
+        - name: SMTP_PORT
+          value: "465"
+        - name: SMTP_USER
+          value: phb@noreply.nenly.cn
+        resources:
+          requests:
+            cpu: 500m
+            memory: 1024Mi
+        volumeMounts:
+        - name: phabricator-data
+          mountPath: /var/data
+        - name: phabricator-repo
+          mountPath: /var/repo
+        - name: ssh-host-rsa-key
+          mountPath: /etc/ssh/key
+        - name: ssh-host-dsa-key
+          mountPath: /etc/ssh/key
+        - name: ssh-host-ecdsa-key
+          mountPath: /etc/ssh/key
+        - name: ssh-host-ed25519-key
+          mountPath: /etc/ssh/key
+        ports:
+          - containerPort: 80
+            name: http
+          - containerPort: 22
+            name: ssl
+      imagePullSecrets:
+        - name: tianzuo-aliyun-registry
+      volumes:
+      - name: phabricator-data
+        persistentVolumeClaim:
+          claimName: phabricator-data
+      - name: phabricator-repo
+        persistentVolumeClaim:
+          claimName: phabricator-repo
+      - name: ssh-host-rsa-key
+        secret:
+          secretName: git-ssh-key
+          items:
+          - key: ssh_host_rsa_key
+            path: ssh_host_rsa_key
+            mode: 384
+      - name: ssh-host-dsa-key
+        secret:
+          secretName: git-ssh-key
+          items:
+          - key: ssh_host_dsa_key
+            path: ssh_host_dsa_key
+            mode: 384
+      - name: ssh-host-ecdsa-key
+        secret:
+          secretName: git-ssh-key
+          items:
+          - key: ssh_host_ecdsa_key
+            path: ssh_host_ecdsa_key
+            mode: 384
+      - name: ssh-host-ed25519-key
+        secret:
+          secretName: git-ssh-key
+          items:
+          - key: ssh_host_ed25519_key
+            path: ssh_host_ed25519_key
+            mode: 384
+
+---
+
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: "dev.nenly.cn"
+  namespace: corp
+  labels:
+    app: phabricator
+  annotations:
+    ingress.kubernetes.io/secure-backends: "true"
+    certmanager.k8s.io/cluster-issuer: "letsencrypt-corp"
+    ingress.kubernetes.io/secure-backends: "false"
+    ingress.kubernetes.io/ssl-redirect: "true"
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  rules:
+  - host: dev.nenly.cn
+    http:
+      paths:
+        - path: /
+          backend:
+            serviceName: phabricator
+            servicePort: 80
+  tls:
+  - hosts:
+    - dev.nenly.cn
+    secretName: phabricator.local-tls
