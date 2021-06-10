@@ -71,7 +71,7 @@ private::docker::build() {
         fi
         local tag=$(echo ${file} | awk -F"/" '{print $2}')
         public::common::log "Build Command: docker build -t ${REPO}/${repo}:${tag} -f ${file} ${repo}/${tag}"
-        # docker build -t ${REPO}/${repo}:${tag} -f ${file} ${repo}/${tag}
+        docker build -t ${REPO}/${repo}:${tag} -f ${file} ${repo}/${tag}
         if [[ ${PUSH} == "true" ]];then
             public::common::log "Push Command: docker push ${REPO}/${repo}:${tag}"
             docker push ${REPO}/${repo}:${tag}
